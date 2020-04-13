@@ -1,0 +1,143 @@
+---
+title: "R Notebook"
+output: html_notebook
+--- ## EZ KELL HOGY A PREVIEW MEGMARADJON!!
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+#Installing Packages that are not already available in the system 
+list.of.packages <- c("ggplot2","dplyr")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+```
+
+```{r}
+rm() # deletelis
+
+#Append
+b <- 1; 
+b <- append(b, 2)
+
+#DELETE from vector
+list.of.packages <- list.of.packages[-3]
+
+#Elvileg igy lehet kommentelni egy soron belul
+#[df$type == "after",]
+
+#MAx value keresés, ha van bennt NULL value
+max(vCO2, na.rm = TRUE)
+
+#NULL values keresés
+summary(vgasprod)
+
+#NULL keresés, de ez csak visszadja a össze0s cellára hogy NULL-e vagy sem TRUE/False
+is.na(vgasprod)
+
+#Duplikaciok eltavolitasa
+df %>% 
+  filter(!grepl('REVERSE', Name))
+  
+unique(bp$Country)
+
+#Assign valtozonak nev adas: ket valtozo osszefuzese a paste-val, majd az ertekadas itt a c vektor az ertek
+assign(paste("egy", format(Sys.time(), "%Y-%m-%d") , sep="_") , c(54,5))
+```
+
+Ide jonnek az okossagok.
+Clear Console CTRL + L
+
+#DATA clear()
+str_trim(" HELLO ", side = "left");
+library("varhandle")
+print(data.frame(value=b, check.numeric=check.numeric(b), converted=as.numeric(b)))
+
+#Create subset
+```{r}
+ab<-subset(bp,bp$Country=="Algeria"| bp$Country=="Belgium")
+```
+
+https://www.r-graph-gallery.com/line-chart-ggplot2.html
+
+```{r}
+labs(
+  title = waiver(),
+  subtitle = waiver(),
+  caption = waiver(),
+  tag = waiver()
+)
+
+xlab(label)
+
+ylab(label)
+
+ggtitle(label, subtitle = waiver())
+```
+
+```{r}
+geom_text(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  parse = FALSE,
+  nudge_x = 0,
+  nudge_y = 0,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+```
+
+
+```{r}
+ggplot(alg3, aes(x=alg3$Year, y=alg3$coalcons_mtoe)) +
+    geom_line(color="#69b3a2", size=2) + theme_classic() +  ggtitle(paste(alg3$Country, "CO2", sep=" ")) + labs(x = "Years", y="Co2 (mtoe)") + 
+  labs(title = alg3$Country, tag = "BP")  + labs(colour = "RED")
+```
+
+```{r}
+func<-function(){
+
+}
+```
+
+```{r}
+ggplot(alg3, aes(x=vYear, y=vCO2)) +
+      geom_line(color="#69b3a2", size=2) + theme_classic() +  ggtitle(paste(alg3$Country, "CO2", sep=" ")) + labs(x = "Years", y="Co2 (mtoe)") + 
+    labs(title = alg3$Country, tag = "BP") 
+```
+
+```{r}
+ggplot(alg3, aes(x=vYear, y=vCO2)) +
++      geom_line(color="#69b3a2", size=2) + theme_classic() +  ggtitle(paste(alg3$Country, "CO2", sep=" ")) + labs(x = "Years", y="Co2 (mtoe)") + 
++    labs(title = alg3$Country, tag = "BP") + geom_text(aes(label = vCO2), check_overlap = TRUE)
+##check_overlap-al nem csúszik egybe a label
+```
+
+```{r}
+# ggrepel - ez egy formázó eszköz a chart-okhoz
+ggplot(alg3, aes(x=vYear, y=vCO2)) +
+      geom_line(color="#69b3a2", size=2) + theme_classic() +  ggtitle(paste(alg3$Country, "CO2", sep=" ")) + labs(x = "Years", y="Co2 (mtoe)") + 
+    labs(title = alg3$Country, tag = "BP")  + ggrepel::geom_label_repel(aes(label = vCO2))
+```
+
+```{r}
+ggplot(alg3, aes(x=vYear, y=vCO2)) +    geom_line(color="#69b3a2", size=2) + theme_classic() +  ggtitle(paste(alg3$Country, "CO2", sep=" ")) + labs(x = "Years", y="Co2 (mtoe)") +     labs(title = alg3$Country, tag = "BP") + geom_line(aes(x=vYear, y=vgasprod), size=2)
+```
+
+#Linaris regresszio + pottyok
+ggplot(alg3, aes(x=vYear, y=vCO2)) +    geom_point(color="#69b3a2", size=2) + theme_classic() +  ggtitle(paste(alg3$Country, "CO2", sep=" ")) + labs(x = "Years", y="Co2 (mtoe)") +     labs(title = alg3$Country, tag = "BP") + geom_point(aes(x=vYear, y=vgasprod), size=2) +geom_smooth(method="lm", se=F) + xlim(c(1975, 2019)) + ylim(c(0, 14))
+
+```{r}
+ggplot(alg3) + geom_jitter(aes(vYear,vgasprod), colour="blue") + geom_smooth(aes(vYear,vgasprod), method=lm, se=FALSE) + geom_jitter(aes(vYear,vCO2), colour="green") + geom_smooth(aes(vYear,vCO2), method=lm, se=FALSE)vc
+```  
+
+Add a new chunk by clicking the *Insert Chulistnk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
